@@ -104,11 +104,12 @@ get '/translate' do
         twiml.text
 
     else
-        twiml = Twilio::TwiML::Response.new do |r|
-        r.Message "We got some problems here. Sorry for the inconvinience and let's try it again"
-        session["last_stage"] == "begin_registration"
-        end
-        twiml.text
+      session["last_context"] = "begin_registration"
+
+      twiml = Twilio::TwiML::Response.new do |r|
+        r.Message "We have some problems here. Let's restart again. What's your name?"
+      end
+      twiml.text   
 
       end
    
@@ -152,7 +153,7 @@ private
     user = User.create( phone_number: sender )
   
     twiml = Twilio::TwiML::Response.new do |r|
-      r.Message "Great. I'll get you set up. First, what's your name?"
+      r.Message "Great. I'll get you set up. First, what's your first name?"
     end
     twiml.text
   
