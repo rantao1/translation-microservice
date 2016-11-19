@@ -103,17 +103,17 @@ get '/translate' do
         end
         twiml.text
 
-    else
-        language_translation = ""
-        twiml = Twilio::TwiML::Response.new do |r|
-        r.Message "Input the language abbreviation you want to translate to. 
-                  We support the following languages: 
-                  #{supported_language}"
-        session["last_stage"] == "choose_language"
-        end
-        twiml.text
+    # else
+    #     language_translation = ""
+    #     twiml = Twilio::TwiML::Response.new do |r|
+    #     r.Message "Input the language abbreviation you want to translate to. 
+    #               We support the following languages: 
+    #               #{supported_language}"
+    #     session["last_stage"] == "choose_language"
+    #     end
+    #     twiml.text
 
-      end
+    #   end
    
     else
       if session["last_stage"] == "ask_for_registration" and body.include? "yes"
