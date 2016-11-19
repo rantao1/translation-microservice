@@ -88,22 +88,12 @@ get '/translate' do
     
     elsif user.agreed_to_terms and session["last_stage"] == "choose_language"
         #if the body matches the database, proceed, otherwise, reinput
-        if supported_language["#{body}"]
-          session["language_translation"] = body
+          session["language_translation"] = "#{body}"
     		  twiml = Twilio::TwiML::Response.new do |r|
           r.Message "Input the text you want to translate(we can automatically detect what language you input)"
           session["last_stage"] == "translate_input"
           end
           twiml.text
-
-        else 
-          twiml = Twilio::TwiML::Response.new do |r|
-          r.Message "The language you choose is not supported or recognized. Make sure you type in the abbreviation. 
-                    We support the following languages: #{supported_language}"
-          session["last_stage"] == "start_service"
-    		  end
-          twiml.text
-        end
 
 
     elsif user.agreed_to_terms and session["last_stage"] == "translate_input" and body != "reset"
