@@ -88,8 +88,8 @@ get '/translate' do
     
     elsif user.agreed_to_terms and session["last_stage"] == "choose_language"
         #if the body matches the database, proceed, otherwise, reinput
-        if supported_language.include? body.downcase == true
-          session["language_translation"] = body.downcase
+        if supported_language["#{body}"]
+          session["language_translation"] = body
     		  twiml = Twilio::TwiML::Response.new do |r|
           r.Message "Input the text you want to translate(we can automatically detect what language you input)"
           session["last_stage"] == "translate_input"
