@@ -113,7 +113,7 @@ get '/translate' do
     #     end
     #     twiml.text
 
-    #   end
+      end
    
     else
       if session["last_stage"] == "ask_for_registration" and body.include? "yes"
